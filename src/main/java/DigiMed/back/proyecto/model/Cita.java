@@ -14,7 +14,7 @@ public class Cita {
 
     private LocalDate fecha;
 
-    private Set<Sintomas> sintomas;
+    private Sintomas sintoma;
 
     public Cita() {}
 
@@ -38,11 +38,11 @@ public class Cita {
         this.fecha = fecha;
     }
 
-    public Set<Sintomas> getSintomas() {
-        return sintomas;
+    public Sintomas getSintomas() {
+        return sintoma;
     }
 
-    public void setSintomas(Set<Sintomas> sintomas) {
-        this.sintomas = sintomas;
+    public void setSintomas(Sintomas sintoma) {
+        this.sintoma = sintoma;
     }
 }
