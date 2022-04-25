@@ -22,11 +22,11 @@ public class Tratamiento {
         this.estado = estado;
     }
 
-    public Tratamiento(String id, String procedimiento, Estados estado) {
+    /*public Tratamiento(String id, String procedimiento, Estados estado) {
         this.id = id;
         this.procedimiento = procedimiento;
         this.estado = estado;
-    }
+    }*/
 
     public String getId() {
         return id;
