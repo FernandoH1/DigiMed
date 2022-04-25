@@ -24,6 +24,14 @@ public class AtencionMedica {
         this.diagnostico = diagnostico;
     }
 
+    public AtencionMedica(String id, String doctorID, String pacienteID, Diagnostico diagnostico, Tratamiento tratamiento) {
+        this.id = id;
+        DoctorID = doctorID;
+        PacienteID = pacienteID;
+        this.diagnostico = diagnostico;
+        this.tratamiento = tratamiento;
+    }
+
     public String getId() {
         return id;
     }

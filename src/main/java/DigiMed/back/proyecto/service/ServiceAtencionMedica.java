@@ -10,7 +10,7 @@ public interface ServiceAtencionMedica {
 
     Flux<AtencionMedica> findAll();
 
-    Mono<Void> delete(String id);
+    Mono<AtencionMedica> delete(String id);
 
     Mono<AtencionMedica> update(String id, AtencionMedica atencionMedica);
 

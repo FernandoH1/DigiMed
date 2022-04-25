@@ -31,11 +31,16 @@ public class PacienteController {
     }
 
     @DeleteMapping("/delete/{id}")
-    private Mono<Void> deletePaciente(@PathVariable("id") String id) {
-        return this.servicePaciente.delete(id);
+    @ResponseStatus(HttpStatus.OK)
+    private Mono<ResponseEntity<Paciente>>deletePaciente(@PathVariable("id") String id) {
+        return this.servicePaciente.delete(id)
+                .flatMap(paciente -> Mono.just(ResponseEntity.ok(paciente)))
+                .switchIfEmpty(Mono.just(ResponseEntity.notFound().build()));
+
     }
 
     @PutMapping("/edit/{id}")
+    @ResponseStatus(HttpStatus.OK)
     private Mono<ResponseEntity<Paciente>> updatePaciente(@PathVariable("id") String id, @RequestBody Paciente paciente) {
         return this.servicePaciente.update(id, paciente)
                 .flatMap(paciente1 -> Mono.just(ResponseEntity.ok(paciente1)))
@@ -50,6 +55,7 @@ public class PacienteController {
 
 
     @PostMapping(value = "/agendar-cita/{id}")
+    @ResponseStatus(HttpStatus.OK)
     private Mono<Paciente> agendarCita(@PathVariable("id") String id, @RequestBody Cita cita) {
         return this.servicePaciente.agendarCitaPaciente(id,cita);
     }

@@ -28,11 +28,15 @@ public class TratamientoController {
     }
 
     @DeleteMapping("/delete/{id}")
-    private Mono<Void> deleteTratamiento(@PathVariable("id") String id) {
-        return this.serviceTratamiento.delete(id);
+    @ResponseStatus(HttpStatus.OK)
+    private Mono<ResponseEntity<Tratamiento>> deleteTratamiento(@PathVariable("id") String id) {
+        return this.serviceTratamiento.delete(id)
+                .flatMap(tratamiento -> Mono.just(ResponseEntity.ok(tratamiento)))
+                .switchIfEmpty(Mono.just(ResponseEntity.notFound().build()));
     }
 
     @PutMapping("/edit/{id}")
+    @ResponseStatus(HttpStatus.OK)
     private Mono<ResponseEntity<Tratamiento>> updateTratamiento(@PathVariable("id") String id, @RequestBody Tratamiento tratamiento) {
         return this.serviceTratamiento.update(id, tratamiento)
                 .flatMap(tratamiento1 -> Mono.just(ResponseEntity.ok(tratamiento1)))
@@ -44,7 +48,6 @@ public class TratamientoController {
     private Mono<Tratamiento> searchTratamientoByID(@PathVariable("id") String id) {
         return this.serviceTratamiento.findById(id);
     }
-
 
 
 }

@@ -24,8 +24,10 @@ public class ServiceEnfermeroImpl implements ServiceEnfermero {
     }
 
     @Override
-    public Mono<Void> delete(String id) {
-        return this.enfermeroRepository.deleteById(id);
+    public Mono<Enfermero> delete(String id) {
+        return this.enfermeroRepository
+                .findById(id)
+                .flatMap(enfermero -> this.enfermeroRepository.deleteById(enfermero.getId()).thenReturn(enfermero));
     }
 
     @Override

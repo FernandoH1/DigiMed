@@ -29,11 +29,15 @@ public class AtencionMedicaController {
     }
 
     @DeleteMapping("/delete/{id}")
-    private Mono<Void> deleteAM(@PathVariable("id") String id) {
-        return this.serviceAtencionMedica.delete(id);
+    @ResponseStatus(HttpStatus.OK)
+    private Mono<ResponseEntity<AtencionMedica>> deleteAM(@PathVariable("id") String id) {
+        return this.serviceAtencionMedica.delete(id)
+                .flatMap(atencionMedica -> Mono.just(ResponseEntity.ok(atencionMedica)))
+                .switchIfEmpty(Mono.just(ResponseEntity.notFound().build()));
     }
 
     @PutMapping("/edit/{id}")
+    @ResponseStatus(HttpStatus.OK)
     private Mono<ResponseEntity<AtencionMedica>> updateAM(@PathVariable("id") String id, @RequestBody AtencionMedica atencionMedica) {
         return this.serviceAtencionMedica.update(id, atencionMedica)
                 .flatMap(atencionMedica1 -> Mono.just(ResponseEntity.ok(atencionMedica1)))
@@ -47,6 +51,7 @@ public class AtencionMedicaController {
     }
 
     @PostMapping(value = "/agregarTratamiento/{id}")
+    @ResponseStatus(HttpStatus.OK)
     private Mono<AtencionMedica> agregarTratamiento(@PathVariable("id") String id, @RequestBody Tratamiento tratamiento) {
         return this.serviceAtencionMedica.agregarTratamiento(id,tratamiento);
     }
