@@ -1,8 +1,7 @@
 package DigiMed.back.proyecto.service.Impl;
 
-import DigiMed.back.proyecto.model.Enfermero;
-import DigiMed.back.proyecto.repository.EnfermeroRepository;
-import DigiMed.back.proyecto.service.ServiceEnfermero;
+import DigiMed.back.proyecto.model.Paciente;
+import DigiMed.back.proyecto.service.ServicePaciente;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -12,17 +11,16 @@ import reactor.test.StepVerifier;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
-class ServiceEnfermeroImplTest {
+class ServicePacienteImplTest {
 
     @Autowired
-    ServiceEnfermero serviceEnfermero;
-
+    ServicePaciente servicePaciente;
 
     @Test
     void save() {
-        Enfermero enfermero = new Enfermero("enfermero", "enfermero@gmail.com" , false);
-        Mono<Enfermero> enfermero1 = serviceEnfermero.save(enfermero);
-        StepVerifier.create(enfermero1).expectNext(enfermero).verifyComplete();
+        Paciente paciente = new Paciente();
+        Mono<Paciente> paciente1 = servicePaciente.save(paciente);
+        StepVerifier.create(paciente1).expectNext(paciente).verifyComplete();
     }
 
     @Test
@@ -42,6 +40,6 @@ class ServiceEnfermeroImplTest {
     }
 
     @Test
-    void cambiarDisponibilidad() {
+    void agendarCitaPaciente() {
     }
 }
