@@ -60,5 +60,10 @@ public class PacienteController {
         return this.servicePaciente.agendarCitaPaciente(id,cita);
     }
 
+   @GetMapping(value = "/DNI/{DNI}")
+    private Mono<Paciente> searchPacienteByDNI(@PathVariable("DNI") String dni) {
+        return this.servicePaciente.findByDNI(dni);
+    }
+
 
 }

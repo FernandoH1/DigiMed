@@ -17,4 +17,6 @@ public interface ServicePaciente {
     Mono<Paciente> findById(String id);
 
     Mono<Paciente> agendarCitaPaciente(String id, Cita cita);
+
+    Mono<Paciente> findByDNI(String DNI);
 }
