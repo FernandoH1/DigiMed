@@ -1,6 +1,7 @@
 package DigiMed.back.proyecto.controller;
 
 import DigiMed.back.proyecto.model.Enfermero;
+import DigiMed.back.proyecto.modelDTO.EmailEnfermeroDTO;
 import DigiMed.back.proyecto.service.Impl.ServiceEnfermeroImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -50,5 +51,11 @@ public class EnfermeroController {
     @ResponseStatus(HttpStatus.OK)
     private Mono<Enfermero> saveEnfermero(@PathVariable("id") String id) {
         return this.serviceEnfermero.cambiarDisponibilidad(id);
+    }
+
+    @PostMapping("/notificationemail")
+    @ResponseStatus(HttpStatus.OK)
+    private Mono<String> sendNotificationEmail(@RequestBody EmailEnfermeroDTO emailEnfermeroDTO) {
+        return this.serviceEnfermero.sendNotificationEmail(emailEnfermeroDTO);
     }
 }
