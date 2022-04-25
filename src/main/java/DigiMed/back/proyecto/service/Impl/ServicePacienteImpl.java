@@ -55,4 +55,9 @@ public class ServicePacienteImpl implements ServicePaciente {
                     return pacienteRepository.save(paciente1);
         });
     }
+
+    @Override
+    public Mono<Paciente> findByDNI(String DNI) {
+        return this.pacienteRepository.findByDNI(DNI);
+    }
 }
