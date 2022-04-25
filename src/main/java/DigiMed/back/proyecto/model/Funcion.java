@@ -14,7 +14,15 @@ public class Funcion {
     private String nombre;
     private String descripcion;
 
+    public Funcion() {}
+
     public Funcion(String nombre, String descripcion) {
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+    }
+
+    public Funcion(String id, String nombre, String descripcion) {
+        this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
     }

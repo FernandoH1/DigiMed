@@ -24,8 +24,10 @@ public class ServiceTratamientoImpl implements ServiceTratamiento {
     }
 
     @Override
-    public Mono<Void> delete(String id) {
-        return this.tratamientoRepository.deleteById(id);
+    public Mono<Tratamiento> delete(String id) {
+        return this.tratamientoRepository
+                .findById(id)
+                .flatMap(paciente -> this.tratamientoRepository.deleteById(paciente.getId()).thenReturn(paciente));
     }
 
     @Override

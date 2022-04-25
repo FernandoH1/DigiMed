@@ -2,7 +2,6 @@ package DigiMed.back.proyecto.service;
 
 import DigiMed.back.proyecto.model.Cita;
 import DigiMed.back.proyecto.model.Paciente;
-import DigiMed.back.proyecto.model.Sintomas;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -11,7 +10,7 @@ public interface ServicePaciente {
 
     Flux<Paciente> findAll();
 
-    Mono<Void> delete(String id);
+    Mono<Paciente> delete(String id);
 
     Mono<Paciente> update(String id, Paciente paciente);
 

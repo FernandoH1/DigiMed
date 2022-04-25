@@ -6,7 +6,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.util.Objects;
 import java.util.UUID;
 
-@Document(collection = "tratamiento")
+@Document(collection = "tratamientos")
 public class Tratamiento {
     @Id
     private String id = UUID.randomUUID().toString().substring(0, 10);
@@ -21,6 +21,12 @@ public class Tratamiento {
         this.procedimiento = procedimiento;
         this.estado = estado;
     }
+
+    /*public Tratamiento(String id, String procedimiento, Estados estado) {
+        this.id = id;
+        this.procedimiento = procedimiento;
+        this.estado = estado;
+    }*/
 
     public String getId() {
         return id;
@@ -51,6 +57,7 @@ public class Tratamiento {
         return "Tratamiento{" +
                 "id='" + id + '\'' +
                 ", procedimiento='" + procedimiento + '\'' +
+                ", estado=" + estado +
                 '}';
     }
 

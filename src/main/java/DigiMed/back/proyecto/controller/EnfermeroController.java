@@ -30,11 +30,16 @@ public class EnfermeroController {
     }
 
     @DeleteMapping("/delete/{id}")
-    private Mono<Void> delete_Enfermero(@PathVariable("id") String id) {
-        return this.serviceEnfermero.delete(id);
+    @ResponseStatus(HttpStatus.OK)
+    private Mono<ResponseEntity<Enfermero>> delete_Enfermero(@PathVariable("id") String id) {
+        return this.serviceEnfermero.delete(id)
+                .flatMap(enfermero -> Mono.just(ResponseEntity.ok(enfermero)))
+                .switchIfEmpty(Mono.just(ResponseEntity.notFound().build()));
     }
 
+
     @PutMapping("/edit/{id}")
+    @ResponseStatus(HttpStatus.OK)
     private Mono<ResponseEntity<Enfermero>> update_Enfermero(@PathVariable("id") String id, @RequestBody Enfermero enfermero) {
         return this.serviceEnfermero.update(id, enfermero)
                 .flatMap(enfermero1 -> Mono.just(ResponseEntity.ok(enfermero1)))

@@ -4,6 +4,7 @@ import DigiMed.back.proyecto.model.Enfermero;
 import DigiMed.back.proyecto.model.Funcion;
 import DigiMed.back.proyecto.modelDTO.EmailEnfermeroDTO;
 import DigiMed.back.proyecto.repository.EnfermeroRepository;
+import DigiMed.back.proyecto.repository.EnfermeroRepository;
 import DigiMed.back.proyecto.service.ServiceEnfermero;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -12,14 +13,13 @@ import org.springframework.boot.test.context.SpringBootTest;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @SpringBootTest
 class ServiceEnfermeroImplTest {
     @Autowired
     ServiceEnfermero servicio;
-
-    EnfermeroRepository repository;
 
     @Test
     void save() {
@@ -47,5 +47,24 @@ class ServiceEnfermeroImplTest {
                 .expectComplete()// ("Message succesfully sent")
                 .verify();
 
+    }
+    @Test
+    void findAll() {
+    }
+
+    @Test
+    void delete() {
+    }
+
+    @Test
+    void update() {
+    }
+
+    @Test
+    void findById() {
+    }
+
+    @Test
+    void cambiarDisponibilidad() {
     }
 }

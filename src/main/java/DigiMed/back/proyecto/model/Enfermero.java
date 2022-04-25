@@ -18,7 +18,16 @@ public class Enfermero {
 
     private Boolean isActive;
 
+    public Enfermero() {}
+
     public Enfermero(String nombre, String email, Boolean isActive) {
+        this.nombre = nombre;
+        this.email = email;
+        this.isActive = isActive;
+    }
+
+   public Enfermero(String id, String nombre, String email, Boolean isActive) {
+        this.id = id;
         this.nombre = nombre;
         this.email = email;
         this.isActive = isActive;

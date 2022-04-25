@@ -1,6 +1,5 @@
 package DigiMed.back.proyecto.service;
 
-import DigiMed.back.proyecto.model.AtencionMedica;
 import DigiMed.back.proyecto.model.Enfermero;
 import DigiMed.back.proyecto.modelDTO.EmailEnfermeroDTO;
 import reactor.core.publisher.Flux;
@@ -11,7 +10,7 @@ public interface ServiceEnfermero {
 
     Flux<Enfermero> findAll();
 
-    Mono<Void> delete(String id);
+    Mono<Enfermero> delete(String id);
 
     Mono<Enfermero> update(String id, Enfermero enfermero);
 

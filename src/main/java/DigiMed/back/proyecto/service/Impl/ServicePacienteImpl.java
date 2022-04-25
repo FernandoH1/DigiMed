@@ -25,8 +25,10 @@ public class ServicePacienteImpl implements ServicePaciente {
     }
 
     @Override
-    public Mono<Void> delete(String id) {
-        return this.pacienteRepository.deleteById(id);
+    public Mono<Paciente> delete(String id) {
+        return this.pacienteRepository
+                .findById(id)
+                .flatMap(paciente -> this.pacienteRepository.deleteById(paciente.getId()).thenReturn(paciente));
     }
 
     @Override
