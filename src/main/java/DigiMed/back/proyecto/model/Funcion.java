@@ -19,6 +19,12 @@ public class Funcion {
         this.descripcion = descripcion;
     }
 
+    public Funcion(String id, String nombre, String descripcion) {
+        this.id = id;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+    }
+
     public String getId() {
         return id;
     }

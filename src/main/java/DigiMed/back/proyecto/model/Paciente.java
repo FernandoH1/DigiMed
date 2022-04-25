@@ -29,6 +29,16 @@ public class Paciente {
         this.citas = new HashSet<>();
     }
 
+    public Paciente(String id, String nombre, String DNI, String EPS, String email, String celular, Set<Cita> citas) {
+        this.id = id;
+        this.nombre = nombre;
+        this.DNI = DNI;
+        this.EPS = EPS;
+        this.email = email;
+        this.celular = celular;
+        this.citas = citas;
+    }
+
     public String getId() {
         return id;
     }

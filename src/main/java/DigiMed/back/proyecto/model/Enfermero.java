@@ -24,6 +24,13 @@ public class Enfermero {
         this.isActive = isActive;
     }
 
+    public Enfermero(String id, String nombre, String email, Boolean isActive) {
+        this.id = id;
+        this.nombre = nombre;
+        this.email = email;
+        this.isActive = isActive;
+    }
+
     public String getId() {
         return id;
     }

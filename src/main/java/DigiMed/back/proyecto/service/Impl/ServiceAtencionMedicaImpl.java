@@ -1,8 +1,6 @@
 package DigiMed.back.proyecto.service.Impl;
 
 import DigiMed.back.proyecto.model.AtencionMedica;
-import DigiMed.back.proyecto.model.Cita;
-import DigiMed.back.proyecto.model.Paciente;
 import DigiMed.back.proyecto.model.Tratamiento;
 import DigiMed.back.proyecto.repository.AtencionMedicaRepository;
 import DigiMed.back.proyecto.service.ServiceAtencionMedica;
@@ -28,10 +26,11 @@ public class ServiceAtencionMedicaImpl implements ServiceAtencionMedica {
     }
 
     @Override
-    public Mono<Void> delete(String id) {
-        return this.atencionMedicaRepository.deleteById(id);
+    public Mono<AtencionMedica> delete(String id) {
+        return this.atencionMedicaRepository
+                .findById(id)
+                .flatMap(atencionMedica -> this.atencionMedicaRepository.deleteById(atencionMedica.getId()).thenReturn(atencionMedica));
     }
-
     @Override
     public Mono<AtencionMedica> update(String id, AtencionMedica atencionMedica) {
         return this.atencionMedicaRepository.findById(id)
