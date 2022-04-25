@@ -14,6 +14,7 @@ public class Diagnostico {
     private String medicamentos;
     private String resultados;
 
+    public Diagnostico() {}
 
     public Diagnostico(String medicamentos, String resultados) {
         this.medicamentos = medicamentos;
