@@ -13,7 +13,7 @@ import reactor.core.publisher.Mono;
 @Validated
 public class ServiceEmailImpl implements ServiceEmail {
 
-    private static final String NOREPLY_ADDRESS = "wiltonhm@hotmail.com";
+    private static final String NOREPLY_ADDRESS = "digimed.sofka@outlook.com";
 
     @Autowired
     private JavaMailSender javaMailSender;
