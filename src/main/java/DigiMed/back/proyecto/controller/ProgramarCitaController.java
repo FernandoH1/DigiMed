@@ -5,7 +5,6 @@ import DigiMed.back.proyecto.service.Impl.ServiceEmailImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @RestController
@@ -15,8 +14,6 @@ public class ProgramarCitaController {
 
     @Autowired
     private ServiceEmailImpl serviceEmail;
-    //private ServiceProgramarCitaImpl serviceProgramarCita;
-
 
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
