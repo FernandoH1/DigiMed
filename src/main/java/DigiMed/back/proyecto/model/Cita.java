@@ -15,11 +15,13 @@ public class Cita {
 
     private LocalDateTime fecha;
 
+    private String correo;
+
     private Sintomas sintoma;
 
     public Cita() {}
 
-    public Cita(LocalDateTime fecha) {
+    public Cita(LocalDateTime fecha, String correo) {
         this.fecha = fecha;
     }
 
@@ -37,6 +39,14 @@ public class Cita {
 
     public void setFecha(LocalDateTime fecha) {
         this.fecha = fecha;
+    }
+
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
     }
 
     public Sintomas getSintomas() {
