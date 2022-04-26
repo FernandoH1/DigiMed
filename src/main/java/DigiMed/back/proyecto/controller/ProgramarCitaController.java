@@ -1,10 +1,7 @@
 package DigiMed.back.proyecto.controller;
 
 import DigiMed.back.proyecto.model.Cita;
-import DigiMed.back.proyecto.model.Paciente;
-import DigiMed.back.proyecto.model.Tratamiento;
-import DigiMed.back.proyecto.service.Impl.ServicePacienteImpl;
-import DigiMed.back.proyecto.service.Impl.ServiceProgramarCitaImpl;
+import DigiMed.back.proyecto.service.Impl.ServiceEmailImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -17,21 +14,17 @@ import reactor.core.publisher.Mono;
 public class ProgramarCitaController {
 
     @Autowired
-    private ServiceProgramarCitaImpl serviceProgramarCita;
+    private ServiceEmailImpl serviceEmail;
+    //private ServiceProgramarCitaImpl serviceProgramarCita;
+
 
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
-    private Mono<Cita> saveCita(@RequestBody Cita cita) {
-        return this.serviceProgramarCita.save(cita);
+    private Mono<String> saveCita(@RequestBody Cita cita) {
+        String subject = "CitaMedica";
+        String text = "Tu cita ha quedado programada para la siguente fecha: "
+                +cita.getFecha();
+        return this.serviceEmail.sendEmailMessage(cita.getCorreo(),subject,text);
     }
 
-    @GetMapping()
-    private Flux<Cita> AllCitas() {
-        return this.serviceProgramarCita.findAll();
-    }
-
-    @GetMapping(value = "/{id}")
-    private Mono<Cita> searchPacienteByID(@PathVariable("id") String id) {
-        return this.serviceProgramarCita.findById(id);
-    }
 }
