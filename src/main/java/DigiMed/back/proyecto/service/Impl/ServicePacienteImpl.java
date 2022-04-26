@@ -58,6 +58,6 @@ public class ServicePacienteImpl implements ServicePaciente {
 
     @Override
     public Mono<Paciente> findByDNI(String DNI) {
-        return this.pacienteRepository.findByDNI(DNI);
+        return this.pacienteRepository.findByDNI(DNI).switchIfEmpty(Mono.just(new Paciente()));
     }
 }

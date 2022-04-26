@@ -44,26 +44,26 @@ class ServiceEnfermeroImplTest {
         StepVerifier.create(enfermero1).expectNext(enfermero).verifyComplete();
     }
 
-    @Test
-    @DisplayName("Test envio de notificacion al enfermero")
-    void testEnviarEmailNotificacion() throws Exception {
-//        arrange
-       /* Enfermero enfermero = new Enfermero("enfermero01", "whenao86@gmial.com", true);
-        EmailEnfermeroDTO enfermeroDTO = new EmailEnfermeroDTO(
-                "enfermeroId0001",
-                new Funcion("inmovilizar miembro", "ferula doble en pulgar"),
-                "10171298"
-        );
-
-        repository = mock(EnfermeroRepository.class);
-
-        when(repository.findById("enfermero01")).thenReturn(Mono.just(enfermero));
-//        act-assert
-        StepVerifier.create(servicio.sendNotificationEmail(enfermeroDTO))
-                .expectComplete()// ("Message succesfully sent")
-                .verify();
-    */
-    }
+//    @Test
+//    @DisplayName("Test envio de notificacion al enfermero")
+//    void testEnviarEmailNotificacion() throws Exception {
+////        arrange
+//        Enfermero enfermero = new Enfermero("enfermero01", "whenao86@gmial.com", true);
+//        EmailEnfermeroDTO enfermeroDTO = new EmailEnfermeroDTO(
+//                "enfermeroId0001",
+//                new Funcion("inmovilizar miembro", "ferula doble en pulgar"),
+//                "10171298"
+//        );
+//
+////        repository2 = mock(EnfermeroRepository.class);
+//
+//        when(repository.findById("enfermero01")).thenReturn(Mono.just(enfermero));
+////        act-assert
+//        StepVerifier.create(servicio.sendNotificationEmail(enfermeroDTO))
+//                .expectComplete()// ("Message succesfully sent")
+//                .verify();
+//
+//    }
 
     @Test
     void delete() {
