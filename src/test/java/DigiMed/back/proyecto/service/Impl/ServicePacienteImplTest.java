@@ -11,7 +11,6 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
@@ -40,23 +39,30 @@ class ServicePacienteImplTest {
         StepVerifier.create(paciente1).expectNext(paciente).verifyComplete();
     }
 
-    @Test
-    void delete() {
-    }
+
 
     @Test
     void update() {
+        Paciente paciente = new Paciente();
+        when(pacienteRepository.save(any())).thenReturn(Mono.just(paciente));
+        Mono<Paciente> paciente1 = servicePaciente.save(paciente);
+        StepVerifier.create(paciente1).expectNext(paciente).verifyComplete();
     }
 
     @Test
     void findById() {
+        Paciente paciente = new Paciente();
+        when(pacienteRepository.findAll()).thenReturn(Flux.just(paciente));
+        Flux<Paciente> paciente1 = servicePaciente.findAll();
+        StepVerifier.create(paciente1).expectNext(paciente).verifyComplete();
     }
 
-    @Test
-    void agendarCitaPaciente() {
-    }
 
     @Test
     void findByDNI(){
+        Paciente paciente = new Paciente();
+        when(pacienteRepository.findByDNI(paciente.getDNI())).thenReturn(Mono.just(paciente));
+        Mono<Paciente> paciente1 = servicePaciente.findByDNI(paciente.getDNI());
+        StepVerifier.create(paciente1).expectNext(paciente).verifyComplete();
     }
 }

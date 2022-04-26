@@ -1,13 +1,8 @@
 package DigiMed.back.proyecto.service.Impl;
 
-import DigiMed.back.proyecto.model.AtencionMedica;
 import DigiMed.back.proyecto.model.Enfermero;
-import DigiMed.back.proyecto.model.Funcion;
-import DigiMed.back.proyecto.modelDTO.EmailEnfermeroDTO;
-import DigiMed.back.proyecto.repository.EnfermeroRepository;
 import DigiMed.back.proyecto.repository.EnfermeroRepository;
 import DigiMed.back.proyecto.service.ServiceEnfermero;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -16,7 +11,6 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @SpringBootTest
@@ -66,18 +60,18 @@ class ServiceEnfermeroImplTest {
 //    }
 
     @Test
-    void delete() {
-    }
-
-    @Test
     void update() {
+        Enfermero enfermero = new Enfermero("enfermero", "enfermero@gmail.com" , false);
+        when(repository.save(any())).thenReturn(Mono.just(enfermero));
+        Mono<Enfermero> enfermero1 = servicio.save(enfermero);
+        StepVerifier.create(enfermero1).expectNext(enfermero).verifyComplete();
     }
 
     @Test
     void findById() {
-    }
-
-    @Test
-    void cambiarDisponibilidad() {
+        Enfermero enfermero = new Enfermero("enfermero", "enfermero@gmail.com" , false);
+        when(repository.findById(enfermero.getId())).thenReturn(Mono.just(enfermero));
+        Mono<Enfermero> enfermero1 = servicio.findById(enfermero.getId());
+        StepVerifier.create(enfermero1).expectNext(enfermero).verifyComplete();
     }
 }
