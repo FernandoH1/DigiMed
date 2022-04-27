@@ -16,7 +16,9 @@ public class ServicePacienteImpl implements ServicePaciente {
 
     @Override
     public Mono<Paciente> save(Paciente paciente) {
-        return this.pacienteRepository.save(paciente);
+        return  this.pacienteRepository.findByDNI(paciente.getDNI())
+                .flatMap(existingPaciente -> Mono.error(new RuntimeException("Paciente ya creado")))
+                .then(this.pacienteRepository.save(paciente));
     }
 
     @Override
