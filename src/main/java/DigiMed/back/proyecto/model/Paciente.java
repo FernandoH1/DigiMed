@@ -20,7 +20,9 @@ public class Paciente {
     private String celular;
     private Set<Cita> citas;
 
-    public Paciente() {}
+    public Paciente() {
+        this.citas = new HashSet<>();
+    }
 
     public Paciente(String nombre, String DNI, String EPS, String email, String celular) {
         this.nombre = nombre;

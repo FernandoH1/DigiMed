@@ -55,4 +55,5 @@ public class AtencionMedicaController {
     private Mono<AtencionMedica> agregarTratamiento(@PathVariable("id") String id, @RequestBody Tratamiento tratamiento) {
         return this.serviceAtencionMedica.agregarTratamiento(id,tratamiento);
     }
+
 }

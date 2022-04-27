@@ -13,6 +13,7 @@ import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import reactor.core.CoreSubscriber;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
@@ -44,22 +45,19 @@ class ServiceAtencionMedicaImplTest {
     }
 
     @Test
-    void delete() {
-        /*AtencionMedica atencionMedica = new AtencionMedica();
-        when(repository.delete(atencionMedica)).thenThrow();
-        Mono<AtencionMedica> atencionMedica1 = serviceAtencionMedica.delete(atencionMedica.getId());
-        StepVerifier.create(atencionMedica1).expectNext(atencionMedica).verifyComplete();*/
-    }
-
-    @Test
     void update() {
+        AtencionMedica atencionMedica = new AtencionMedica();
+        when(repository.save(any())).thenReturn(Mono.just(atencionMedica));
+        Mono<AtencionMedica> atencionMedica1 = serviceAtencionMedica.save(atencionMedica);
+        StepVerifier.create(atencionMedica1).expectNext(atencionMedica).verifyComplete();
     }
 
     @Test
     void findById() {
+        AtencionMedica atencionMedica = new AtencionMedica();
+        when(repository.findById(atencionMedica.getId())).thenReturn(Mono.just(atencionMedica));
+        Mono<AtencionMedica> atencionMedica1 = serviceAtencionMedica.findById(atencionMedica.getId());
+        StepVerifier.create(atencionMedica1).expectNext(atencionMedica).verifyComplete();
     }
 
-    @Test
-    void agregarTratamiento() {
-    }
 }

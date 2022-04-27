@@ -11,7 +11,6 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
@@ -41,14 +40,18 @@ class ServiceTratamientoImplTest {
     }
 
     @Test
-    void delete() {
-    }
-
-    @Test
     void update() {
+        Tratamiento tratamiento = new Tratamiento();
+        when(tratamientoRepository.save(any())).thenReturn(Mono.just(tratamiento));
+        Mono<Tratamiento> tratamiento1 = serviceTratamiento.save(tratamiento);
+        StepVerifier.create(tratamiento1).expectNext(tratamiento).verifyComplete();
     }
 
     @Test
     void findById() {
+        Tratamiento tratamiento = new Tratamiento();
+        when(tratamientoRepository.findAll()).thenReturn(Flux.just(tratamiento));
+        Flux<Tratamiento> tratamiento1 = serviceTratamiento.findAll();
+        StepVerifier.create(tratamiento1).expectNext(tratamiento).verifyComplete();
     }
 }
