@@ -1,6 +1,7 @@
 package DigiMed.back.proyecto.controller;
 
 import DigiMed.back.proyecto.model.Cita;
+import DigiMed.back.proyecto.modelDTO.ProgramarCitaDTO;
 import DigiMed.back.proyecto.service.Impl.ServiceEmailImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,7 +18,7 @@ public class ProgramarCitaController {
 
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
-    private Mono<String> saveCita(@RequestBody Cita cita) {
+    private Mono<String> saveCita(@RequestBody ProgramarCitaDTO cita) {
         String subject = "CitaMedica";
         String text = "Tu cita ha quedado programada para la siguente fecha: "
                 +cita.getFecha();
