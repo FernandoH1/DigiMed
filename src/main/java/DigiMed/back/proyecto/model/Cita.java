@@ -4,8 +4,6 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Set;
 import java.util.UUID;
 
 @Document(collection = "citas")
@@ -13,15 +11,13 @@ public class Cita {
     @Id
     private String id = UUID.randomUUID().toString().substring(0, 10);
 
-    private LocalDateTime fecha;
-
-    private String correo;
+    private LocalDate fecha;
 
     private Sintomas sintoma;
 
     public Cita() {}
 
-    public Cita(LocalDateTime fecha, String correo) {
+    public Cita(LocalDate fecha) {
         this.fecha = fecha;
     }
 
@@ -33,20 +29,12 @@ public class Cita {
         this.id = id;
     }
 
-    public LocalDateTime getFecha() {
+    public LocalDate getFecha() {
         return fecha;
     }
 
-    public void setFecha(LocalDateTime fecha) {
+    public void setFecha(LocalDate fecha) {
         this.fecha = fecha;
-    }
-
-    public String getCorreo() {
-        return correo;
-    }
-
-    public void setCorreo(String correo) {
-        this.correo = correo;
     }
 
     public Sintomas getSintomas() {
