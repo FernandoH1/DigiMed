@@ -20,7 +20,7 @@ public class FormularioFeedbackController {
     private Mono<String> enviarFormulario(@RequestBody ProgramarCitaDTO dto ) {
         String subject = "Formulario de control de calidad en la atención de los pacientes - DigiMed ";
         String text = "Te he invitado a que rellenes un formulario:\n " +
-                "Link:  https://docs.google.com/forms/d/1gTlAZg48DFA6T49Ev8gX2Rm5wFjvmeGp-ibS98DWVug/edit?usp=sharing";
+                "Link:  https://docs.google.com/forms/d/1gTlAZg48DFA6T49Ev8gX2Rm5wFjvmeGp-ibS98DWVug/prefill";
         return this.serviceEmail.sendEmailMessage(dto.getCorreo(),subject,text);
     }
 }
