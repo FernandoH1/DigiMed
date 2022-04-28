@@ -38,7 +38,7 @@ public class ServicePacienteImpl implements ServicePaciente {
         return this.pacienteRepository.findById(id)
                 .flatMap(paciente1 -> {
                     paciente.setId(id);
-                    return save(paciente);
+                    return this.pacienteRepository.save(paciente);
                 })
                 .switchIfEmpty(Mono.empty());
     }
