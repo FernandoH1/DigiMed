@@ -57,9 +57,21 @@ public class ServiceAtencionMedicaImpl implements ServiceAtencionMedica {
     public Mono<AtencionMedica> agregarTratamiento(String id, TratamientoCitaDTO tratamientoCitaDTO){
         return this.atencionMedicaRepository.findById(id)
                 .flatMap(atencionMedica -> {
-                    atencionMedica.setTratamiento(tratamientoCitaDTO.getTratamiento());
-                    return  atencionMedicaRepository.save(atencionMedica);
+                    return this.servicePaciente.findById(atencionMedica.getPacienteID())
+                            .flatMap(paciente -> {
+                                String subject = "Formulario de control de calidad en la atención de los pacientes - DigiMed ";
+                                String text = "Te he invitado a que rellenes un formulario:\n " +
+                                        "Link:  https://forms.gle/ua6PpqWTKPmD1ZaGA";
+                                this.serviceEmail.sendEmailMessage(paciente.getEmail(),subject,text);
+                                atencionMedica.setTratamiento(tratamientoCitaDTO.getTratamiento());
+                                return  atencionMedicaRepository.save(atencionMedica);
+                            });
                 });
+//                .flatMap(atencionMedica -> {
+//                    return this
+//                    atencionMedica.setTratamiento(tratamientoCitaDTO.getTratamiento());
+//                    return  atencionMedicaRepository.save(atencionMedica);
+//                });
     }
 
     public Mono<AtencionMedica> agregarTratamientoCita(String id, TratamientoCitaDTO tratamientoCitaDTO){
@@ -75,6 +87,10 @@ public class ServiceAtencionMedicaImpl implements ServiceAtencionMedica {
                                                         paciente.getNombre(),
                                                         tratamientoCitaDTO.getFecha().toString())
                                                 );
+                                        String subject = "Formulario de control de calidad en la atención de los pacientes - DigiMed ";
+                                        String text = "Te he invitado a que rellenes un formulario:\n " +
+                                                "Link:  https://forms.gle/ua6PpqWTKPmD1ZaGA";
+                                        this.serviceEmail.sendEmailMessage(paciente.getEmail(),subject,text);
                                         atencionMedica.setTratamiento(tratamientoCitaDTO.getTratamiento());
                                         paciente.getCitas().add(new Cita(tratamientoCitaDTO.getFecha().toLocalDate()));
                                         this.servicePaciente.update(paciente.getId(), paciente).subscribe(System.out::println);
