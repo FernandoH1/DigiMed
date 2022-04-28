@@ -19,7 +19,9 @@ public class ServiceEnfermeroImpl implements ServiceEnfermero {
 
     @Override
     public Mono<Enfermero> save(Enfermero enfermero) {
-        return this.enfermeroRepository.save(enfermero);
+        return this.enfermeroRepository.findByEmail(enfermero.getEmail())
+                .flatMap(existingEnfermero -> Mono.error(new IllegalArgumentException("Correo de enfermero ya existe")))
+                .then(this.enfermeroRepository.save(enfermero));
     }
 
     @Override
