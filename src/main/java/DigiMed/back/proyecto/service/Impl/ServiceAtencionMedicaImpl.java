@@ -1,7 +1,9 @@
 package DigiMed.back.proyecto.service.Impl;
 
 import DigiMed.back.proyecto.model.AtencionMedica;
+import DigiMed.back.proyecto.model.Cita;
 import DigiMed.back.proyecto.model.Tratamiento;
+import DigiMed.back.proyecto.modelDTO.TratamientoCitaDTO;
 import DigiMed.back.proyecto.repository.AtencionMedicaRepository;
 import DigiMed.back.proyecto.service.ServiceAtencionMedica;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,11 @@ public class ServiceAtencionMedicaImpl implements ServiceAtencionMedica {
     @Autowired
     AtencionMedicaRepository atencionMedicaRepository;
 
+    @Autowired
+    ServiceEmailImpl serviceEmail;
+
+    @Autowired
+    ServicePacienteImpl servicePaciente;
 
     @Override
     public Mono<AtencionMedica> save(AtencionMedica atencionMedica) {
@@ -47,11 +54,32 @@ public class ServiceAtencionMedicaImpl implements ServiceAtencionMedica {
     }
 
     @Override
-    public Mono<AtencionMedica> agregarTratamiento(String id, Tratamiento tratamiento){
+    public Mono<AtencionMedica> agregarTratamiento(String id, TratamientoCitaDTO tratamientoCitaDTO){
         return this.atencionMedicaRepository.findById(id)
                 .flatMap(atencionMedica -> {
-                    atencionMedica.setTratamiento(tratamiento);
+                    atencionMedica.setTratamiento(tratamientoCitaDTO.getTratamiento());
                     return  atencionMedicaRepository.save(atencionMedica);
+                });
+    }
+
+    public Mono<AtencionMedica> agregarTratamientoCita(String id, TratamientoCitaDTO tratamientoCitaDTO){
+        System.out.println(tratamientoCitaDTO);
+        return this.atencionMedicaRepository.findById(id)
+                .flatMap(atencionMedica -> {
+                    return this.servicePaciente.findById(atencionMedica.getPacienteID())
+                                    .flatMap(paciente -> {
+                                        this.serviceEmail.sendEmailMessage(
+                                                paciente.getEmail(),
+                                                String.format("DigiMed - Cita programada "),
+                                                String.format("Apreciado %s \n\nTu cita ha quedado programada para la siguente fecha:\n%s ",
+                                                        paciente.getNombre(),
+                                                        tratamientoCitaDTO.getFecha().toString())
+                                                );
+                                        atencionMedica.setTratamiento(tratamientoCitaDTO.getTratamiento());
+                                        paciente.getCitas().add(new Cita(tratamientoCitaDTO.getFecha().toLocalDate()));
+                                        this.servicePaciente.update(paciente.getId(), paciente).subscribe(System.out::println);
+                                        return  atencionMedicaRepository.save(atencionMedica);
+                                    });
                 });
     }
 }

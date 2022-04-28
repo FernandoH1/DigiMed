@@ -2,6 +2,7 @@ package DigiMed.back.proyecto.controller;
 
 import DigiMed.back.proyecto.model.AtencionMedica;
 import DigiMed.back.proyecto.model.Tratamiento;
+import DigiMed.back.proyecto.modelDTO.TratamientoCitaDTO;
 import DigiMed.back.proyecto.service.Impl.ServiceAtencionMedicaImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -52,8 +53,13 @@ public class AtencionMedicaController {
 
     @PostMapping(value = "/agregarTratamiento/{id}")
     @ResponseStatus(HttpStatus.OK)
-    private Mono<AtencionMedica> agregarTratamiento(@PathVariable("id") String id, @RequestBody Tratamiento tratamiento) {
-        return this.serviceAtencionMedica.agregarTratamiento(id,tratamiento);
+    private Mono<AtencionMedica> agregarTratamiento(@PathVariable("id") String id, @RequestBody TratamientoCitaDTO tratamientoCitaDTO) {
+        return this.serviceAtencionMedica.agregarTratamiento(id,tratamientoCitaDTO);
     }
 
+    @PostMapping(value = "/agregarTratamientoCita/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    private Mono<AtencionMedica> agregarTratamientoCita(@PathVariable("id") String id, @RequestBody TratamientoCitaDTO tratamientoCitaDTO) {
+        return this.serviceAtencionMedica.agregarTratamientoCita(id,tratamientoCitaDTO);
+    }
 }
